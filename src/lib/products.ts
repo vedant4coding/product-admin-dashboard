@@ -39,3 +39,18 @@ export const fetchCategories = async (): Promise<string[]> => {
   const response = await api.get<string[]>('/products/category-list');
   return response.data;
 };
+
+export const createProduct = async (productData: Partial<Product>): Promise<Product> => {
+  const response = await api.post<Product>('/products/add', productData);
+  return response.data;
+};
+
+export const updateProduct = async (id: number, productData: Partial<Product>): Promise<Product> => {
+  const response = await api.put<Product>(`/products/${id}`, productData);
+  return response.data;
+};
+
+export const deleteProduct = async (id: number): Promise<{ id: number; isDeleted: boolean }> => {
+  const response = await api.delete<{ id: number; isDeleted: boolean }>(`/products/${id}`);
+  return response.data;
+};
